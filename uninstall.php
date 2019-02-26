@@ -14,4 +14,13 @@ global $wpdb;
 
 $table = $wpdb->prefix . 'bars_zone';
 
+$post_table = $wpdb->prefix . 'posts';
+$postmeta_table = $wpdb->prefix . 'postmeta';
+$term_relationship_table = $wpdb->prefix . 'term_relationships';
+$post_type = 'bars';
+
+$wpdb->query( $wpdb->prepare( "DELETE FROM %s WHERE post_type = %s", $post_table, $post_type ) );
+$wpdb->query( $wpdb->prepare( "DELETE FROM %s WHERE post_id NOT IN (SELECT id FROM %s)", $postmeta_table, $post_table ) );
+$wpdb->query( $wpdb->prepare( "DELETE FROM %s WHERE object_id NOT IN (SELECT id FROM %s)", $postmeta_table, $post_table ) );
+
 $wpdb->query( $wpdb->prepare( "DROP TABLE IF EXISTS %s", $table ) );
