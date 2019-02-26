@@ -50,13 +50,19 @@ form{
         display: flex;
         flex-direction: column;
         width: 100%;
+
         label { margin-right: auto; margin-left: 0; margin-top: 1em;
-            &:nth-first-child(1) {
-                margin-top: 0;
-            }
+            font-size: 11px;
+            font-size: 0.6875rem;
+            font-weight: 800;
+            letter-spacing: 0.1818em;
+            text-transform: uppercase;
         }
+
         input {
+            width: 100%;
             &[type="submit"] {
+                width: auto;
                 margin-top: 1em;
                 margin-left: auto;
             }

@@ -170,14 +170,14 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 $first = true;
 
                 foreach ( $data as $search ) {
-                    
+
                     if ( $first ) {
                         $first = false;
                     } else {
                         echo $between_items;
                     }
                     
-                    // var_dump($search);
+                    
                     echo '<a href="', get_search_link( $search ), '"';
 
                     if ( $options['nofollow'] ) {
@@ -285,18 +285,39 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             else{
                 $search = stripslashes($query);
             }
-    
+            
             $permastruct = $wp_rewrite->get_search_permastruct();
-    
+            $link;
             if ( empty( $permastruct ) ) {
-                $link = home_url('?s=' . urlencode($search) );
+
+                if( get_search_query() ) {
+                    $link = home_url('?s=' . urlencode($search) );
+                }
+                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
+                    $link = home_url('?search=advanced&s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
+                }
+                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
+                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country='  . urlencode($search) . '&pbp_csc=&pbp_postal_code=' );
+                }
+                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
+                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc='  . urlencode($search) . '&pbp_postal_code=' );
+                }
+                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
+                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=' . urlencode($search) );
+                }
+                
+
             } else {
                 $search = urlencode($search);
+                var_dump($search);
                 $search = str_replace('%2F', '/', $search); // %2F(/) is not valid within a URL, send it unencoded.
+                
                 $link = str_replace( '%search%', $search, $permastruct );
+
                 $link = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $link, 'search' );
+                // $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
             }
-    
+
             return apply_filters( 'search_link', $link, $search );
         }
     }
