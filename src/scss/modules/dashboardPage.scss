@@ -1,0 +1,24 @@
+.pbp-admin-form-section {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 2em;
+    background-color: #fff;
+    box-sizing: border-box;
+
+    input,
+    textarea {
+        border-radius: 15px;
+        padding-left: 15px;
+    }
+
+}
+
+.pbp-code {
+    margin-left: 15px;
+    opacity: 0;
+
+    &.reveal {
+        opacity: 1;
+    }
+}

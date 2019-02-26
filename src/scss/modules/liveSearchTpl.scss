@@ -1,0 +1,46 @@
+.pbp-live-search--container {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    form {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        height: 60px;
+        margin-top: 1em;
+        font-size: 24px;
+
+        input {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding-left: 15px;
+            border-radius: 15px;
+        }
+
+    }
+
+}
+
+.pbp-search--result__container {
+    display: block;
+    width: 100%;
+    padding: 2em 1em;
+
+    .result-content {
+        width: 100%;
+
+        .result-content--item {
+            position: relative;
+            width: 100%;
+            padding: 1em;
+            border-bottom: 1px solid #eee;
+            margin-top: 1em;
+        }
+
+    }
+}

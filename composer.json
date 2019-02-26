@@ -1,0 +1,17 @@
+{
+    "name": "niloy/pubs-bars-plugin",
+    "description": "This is Pubs/Bars Searching Plugin writen by Niloy Rudra to give this website a particular ability of searching through the entries of pubs/bars based on user's queries and populate the output with what they need from this beautiful website.",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Niloy Rudra",
+            "email": "niloyrudra4249@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}

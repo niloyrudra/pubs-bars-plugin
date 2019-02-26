@@ -1,0 +1,33 @@
+.pbp-search-location-form {
+    position: relative;
+    display: block;
+    width: 100;
+    box-sizing: border-box;
+    box-shadow: 0px 15px 35px -15px #e1e1e1;
+    padding: 2em 0.4em;
+    border: dashed 2px #e1e1e1;
+    margin-bottom: 50px;
+
+    form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        #addressInput {
+            max-width: 40%;
+        }
+
+        input, select, label { margin: 0 0.5em; }
+        label { margin-right: 0; }
+        input { 
+            padding: 3px 15px;
+        }
+        select {
+            padding: 0 10px;
+            border-radius: 15px;
+            border-color: #e1e1e1;
+            box-shadow: 0px 15px 35px -15px #e1e1e1;
+        }
+    }
+
+}

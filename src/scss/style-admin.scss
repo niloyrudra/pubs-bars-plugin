@@ -1,0 +1,71 @@
+/*
+    IMPORTS
+*/
+@import './modules/dashboardPage.scss';
+@import './modules/dbManagerPage.scss';
+
+
+/*
+    Generic Classes
+*/
+
+.pbp-db-table {
+	width: 100%;
+	border-spacing: 5px;
+	text-align: left;
+}
+
+.pbp-db-table tr {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.pbp-db-table,
+.pbp-db-table th,
+.pbp-db-table td {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.pbp-db-table th {
+    background-color: #f5f5f5;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.text-center {
+	text-align: center;
+}
+
+
+span {
+    &.pbp-upload-btn-icon {
+        position: relative;
+
+        .dashicons {
+            position: absolute;
+            top: 5px;
+            left: 7px;
+            color: #969696;
+            transition: all 320ms ease-in;
+        }
+
+        #upload-button,
+        #remove-button {
+            padding-left: 30px;
+            border-radius: 15px;
+        }
+
+        &:hover,
+        &:focus {
+            .dashicons {
+                color: #333;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "pubs-bars-plugin",
+  "version": "1.0.0",
+  "description": "This is Pubs/Bars Searching Plugin writen by Niloy Rudra to give this website a particular ability of searching through the entries of pubs/bars based on user's queries and populate the output with what they need from this beautiful website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "dev"
+  },
+  "keywords": [
+    "WordPress",
+    "Plugin",
+    "Search",
+    "Engine",
+    "Live",
+    "Search",
+    "Bars",
+    "Pubs",
+    "Custom",
+    "Database",
+    "Table"
+  ],
+  "author": "Niloy Rudra",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babelify": "^8.0.0",
+    "browserify": "^16.2.3",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "dependencies": {
+    "code-prettify": "^0.1.0"
+  }
+}

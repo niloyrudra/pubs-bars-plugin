@@ -1,0 +1,88 @@
+@import './modules/liveSearchTpl';
+@import './modules/search-template-form.scss';
+@import './modules/search-location-form.scss';
+@import './modules/data-index-tpl.scss';
+@import './modules/defaultSearchTpl.scss';
+
+/* Google Map Height */
+#map {
+    height: 40%;
+}
+
+svg {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    height: 46px;
+    width: 46px;
+    display: grid;
+    margin-left: 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 50%;
+    padding: 9px 8px 8px 9px;
+    // transition: all 160ms ease-in;
+    cursor: pointer;
+
+    path {
+        fill: #222;
+        text-shadow: 0px 0px 13px rgba(0,0,0,0.3);
+    }
+
+    &:hover,
+    &:focus {
+        box-shadow: inset 0px 0px 13px rgba(0,0,0,0.3);
+        // background-color: #d5d5d5;
+    }
+
+}
+
+ul {
+    &.pbp-list-group{
+        li {
+            list-style-type: none;
+        }
+    }
+}
+
+form{
+    &#advanced-searchform {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        label { margin-right: auto; margin-left: 0; margin-top: 1em;
+            &:nth-first-child(1) {
+                margin-top: 0;
+            }
+        }
+        input {
+            &[type="submit"] {
+                margin-top: 1em;
+                margin-left: auto;
+            }
+        }
+    }
+}
+
+.pbp-custom-searchform-fields {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    label { visibility: hidden; display: none; }
+    input {
+        &[type="text"] {
+            padding-right: 100px;
+        }
+        &[type="submit"] {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            bottom: 3px;
+            text-align: center;
+            padding: 0.75em 1.5em;
+        }
+    }
+
+}
