@@ -26,23 +26,23 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
         }
     
         // Page load
-        function template_redirect() {
+        function template_redirect()
+        {
 
             if ( is_search() ) {
 
-                // Store search term
-                $query = $this->strtolower( trim( get_search_query() ) );
-    
+                // Setting Options
                 $options = get_option( 'recent_searches_widget' );
-
+                
                 if ( !is_array( $options ) ) {
                     $options = $this->get_default_options();
                 }
 
                 $max = $options['max'];
     
+                // Recent-Searches-Array
                 $data = get_option( 'recent_searches_widget_data', array() );
-
+                
                 if ( !is_array( $data ) ) {
 
                     if ( isset( $options['data'] ) ) {
@@ -57,7 +57,31 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
                 }
     
-                $pos = array_search( $query, $data );
+                // Searching For Keys depending on queried values
+                $query = '';
+                $pos;
+
+                if( get_search_query() ) {
+                    $query = $this->strtolower( trim( get_search_query() ) );
+                    $pos = array_search( $query, $data );
+                }
+                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
+                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_city' ] ) ) );
+                    $pos = array_search( $query, $data );
+                }
+                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
+                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_country' ] ) ) );
+                    $pos = array_search( $query, $data );
+                }
+                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
+                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_csc' ] ) ) );
+                    $pos = array_search( $query, $data );
+                }
+                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
+                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_postal_code' ] ) ) );
+                    $pos = array_search( $query, $data );
+                }
+                
 
                 if ( $pos !== false ) {
 
@@ -67,10 +91,11 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                     }
 
                 } else {
-
+                    // Adding Recent Searches to Recent-Searches-Array
                     array_unshift( $data, $query );
                     
                     if ( count( $data ) > $max ) {
+                        // Excluding Recent Searches as the results exceeds max num
                         array_pop( $data );
                     }
 
@@ -82,7 +107,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
         }
     
         // Widgets initialization
-        public function widgets_init() {
+        public function widgets_init()
+        {
 
             $widget_ops = array(
                 'classname' => 'widget_rsw', 
@@ -90,28 +116,36 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             );
 
             wp_register_sidebar_widget( 'recentsearcheswidget', __('Recent Searches', 'pubs-bars-plugin'), 
-                array( &$this, 'widget_rsw' ), $widget_ops );
+                [ &$this, 'widget_rsw' ], $widget_ops );
 
             wp_register_widget_control( 'recentsearcheswidget', __('Recent Searches', 'pubs-bars-plugin'), 
-                array( &$this, 'widget_rsw_control' ) );
+                [ &$this, 'widget_rsw_control' ] );
                 
         }
     
-        function widget_rsw( $args ) {
+        public function widget_rsw( $args )
+        {
             extract( $args );
+
             $title = isset( $options['title'] ) ? $options['title'] : '';
             $title = apply_filters( 'widget_title', $title );
+
             if ( empty($title) )
                 // $title = '&nbsp;';
-                $title = __( 'Recent Searches', 'pubs-bars-plugin' ) . '&nbsp;';
-                
+                $title =  __( 'Recent Searches', 'pubs-bars-plugin' ) . '&nbsp;';
+
             echo $before_widget . $before_title . $title . $after_title, "\n";
+
             $this->show_recent_searches( "<ul>\n<li>", "</li>\n</ul>", "</li>\n<li>" );
             echo $after_widget;
+
         }
     
-        function show_recent_searches( $before_list, $after_list, $between_items ) {
+        public function show_recent_searches( $before_list, $after_list, $between_items )
+        {
+
             $options = get_option( 'recent_searches_widget' );
+
             if ( !is_array( $options ) ) {
                 $options = $this->get_default_options();
             }
@@ -136,20 +170,21 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 $first = true;
 
                 foreach ( $data as $search ) {
-
+                    
                     if ( $first ) {
                         $first = false;
                     } else {
                         echo $between_items;
                     }
-    
+                    
+                    // var_dump($search);
                     echo '<a href="', get_search_link( $search ), '"';
 
                     if ( $options['nofollow'] ) {
                         echo ' rel="nofollow"';
                     }
 
-                    echo '>', wp_specialchars( $search ), '</a>';
+                    echo '>',  esc_html( $search ), '</a>';
 
                 }
 
@@ -163,7 +198,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
         }
     
-        function widget_rsw_control() {
+        public function widget_rsw_control()
+        {
 
             $options = $newoptions = get_option('recent_searches_widget', array() );
 
@@ -190,10 +226,16 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             $nofollow = $options['nofollow'];
 
         ?>
-        <p><label for="rsw-title"><?php _e('Title:', 'pubs-bars-plugin'); ?> <input class="widefat" id="rsw-title" name="rsw-title" type="text" value="<?php echo $title; ?>" /></label></p>
-        <p><label for="rsw-max"><?php _e('Max searches:', 'pubs-bars-plugin'); ?> <input id="rsw-max" name="rsw-max" type="text" size="3" maxlength="5" value="<?php echo $max; ?>" /></label></p>
-        <p><label for="rsw-nofollow"><?php _e('Add <code>rel="nofollow"</code> to links:', 'pubs-bars-plugin'); ?> <input id="rsw-nofollow" name="rsw-nofollow" type="checkbox" value="yes" <?php checked( $nofollow, true ); ?>" /></label></p>
-        <input type="hidden" id="rsw-submit" name="rsw-submit" value="1" />
+            <p>
+                <label for="rsw-title"><?php _e('Title:', 'pubs-bars-plugin'); ?> <input class="widefat" id="rsw-title" name="rsw-title" type="text" value="<?php echo $title; ?>" /></label>
+            </p>
+            <p>
+                <label for="rsw-max"><?php _e('Max searches:', 'pubs-bars-plugin'); ?> <input id="rsw-max" name="rsw-max" type="text" size="3" maxlength="5" value="<?php echo $max; ?>" /></label>
+            </p>
+            <p>
+                <label for="rsw-nofollow"><?php _e('Add <code>rel="nofollow"</code> to links:', 'pubs-bars-plugin'); ?> <input id="rsw-nofollow" name="rsw-nofollow" type="checkbox" value="yes" <?php checked( $nofollow, true ); ?>" /></label>
+            </p>
+            <input type="hidden" id="rsw-submit" name="rsw-submit" value="1" />
         <?php
         }
     
@@ -209,7 +251,7 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
         function get_default_options() {
             return array(
                 'title' => '',
-                'max' => 4,
+                'max' => 5,
                 'nofollow' => true,
             );
         }
@@ -235,11 +277,14 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
         function get_search_link( $query = '' ) {
             
             global $wp_rewrite;
-    
-            if ( empty($query) )
+
+            
+            if ( empty($query) ) {
                 $search = get_search_query();
-            else
+            }
+            else{
                 $search = stripslashes($query);
+            }
     
             $permastruct = $wp_rewrite->get_search_permastruct();
     
