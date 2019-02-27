@@ -340,22 +340,22 @@ class CptController
     public function set_custom_columns( $columns )
     {
 
-        $name = $columns[ 'title' ];
-        $date = $columns[ 'date' ];
-        $author = $columns[ 'author' ];
+        $name       = $columns[ 'title' ];
+        $date       = $columns[ 'date' ];
+        $author     = $columns[ 'author' ];
         $categories = $columns[ 'categories' ];
-        $tags = $columns[ 'tags' ];
-        $comments = $columns[ 'comments' ];
+        $tags       = $columns[ 'tags' ];
+        $comments   = $columns[ 'comments' ];
 
         unset( $columns[ 'title' ], $columns[ 'date' ], $columns[ 'author' ], $columns[ 'categories' ], $columns[ 'tags' ], $columns[ 'comments' ] );
 
-        // $columns[ 'name' ] = __( 'Pubs\Bars', 'pubs-bars-plugin' );
-        $columns[ 'title' ] = $name;
-        $columns[ 'city' ] = __( 'City', 'pubs-bars-plugin' );
-        $columns[ 'country' ] = __( 'Country', 'pubs-bars-plugin' );
-        $columns[ 'csc' ] = __( 'CSC', 'pubs-bars-plugin' );
-        $columns[ 'address' ] = __( 'Address', 'pubs-bars-plugin' );
-        $columns[ 'date' ] = $date;
+        $columns[ 'title' ]     = $name;
+        $columns[ 'city' ]      = __( 'City', 'pubs-bars-plugin' );
+        $columns[ 'country' ]   = __( 'Country', 'pubs-bars-plugin' );
+        $columns[ 'csc' ]       = __( 'CSC', 'pubs-bars-plugin' );
+        $columns[ 'address' ]   = __( 'Address', 'pubs-bars-plugin' );
+        $columns[ 'feature' ]   = __( 'Featured', 'pubs-bars-plugin' );
+        $columns[ 'date' ]      = $date;
 
         return $columns;
 
@@ -382,13 +382,8 @@ class CptController
         $city              = isset( $city ) ? $city : '';
         $country           = isset( $country ) ? $country : '';
         $csc               = isset( $csc ) ? $csc : '';
-        // $latitude          = @$data[ 'latitude' ] ?? '';
-        // $longitude         = @$data[ 'longitude' ] ?? '';
-        // $website           = @$data[ 'website' ] ?? '';
-        // $twitter           = @$data[ 'twitter' ] ?? '';
-        // $facebook          = @$data[ 'facebook' ] ?? '';
         // $phone_num         = @$data[ 'phone_num' ] ?? '';
-        // $feature           = isset( $feature ) && $feature === 1 ? __( 'YES', 'pubs-bars-plugin' ) : __( 'NO', 'pubs-bars-plugin' );
+        $featured          = isset( $feature ) ? __( 'YES', 'pubs-bars-plugin' ) : __( 'NO', 'pubs-bars-plugin' );
 
         switch ($column) {
             case 'city':
@@ -405,6 +400,11 @@ class CptController
 
             case 'address':
                 echo '<strong>' .$address . '</strong>';
+                break;
+            
+
+            case 'feature':
+                echo '<strong>' .$featured . '</strong>';
                 break;
             
             default:
