@@ -100,7 +100,7 @@ class SearchController
 
         // check if the user is requesting an admin page 
         // or current query is not the main query
-        if ( is_admin() && $query->is_feed() && ! $query->is_main_query() ){
+        if ( is_admin() || $query->is_feed() || ! $query->is_main_query() ){
             return;
         }
 
@@ -168,6 +168,7 @@ class SearchController
     public function pbp_rewrite_rule()
     {
         // Custom Post Archive
+        // add_rewrite_rule( '^bars/([^/]*)/?', 'index.php?s=$matches[1]','top' );
         add_rewrite_rule( '^bars/city/([^/]*)/?', 'index.php?post_type=bars&city=$matches[1]','top' );
         add_rewrite_rule( '^bars/country/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]','top' );
         add_rewrite_rule( '^bars/csc/([^/]*)/?', 'index.php?post_type=bars&csc=$matches[1]','top' );

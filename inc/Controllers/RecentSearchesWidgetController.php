@@ -16,7 +16,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
     class RecentSearchesWidgetController {
 
         // Constructor
-        public function register_recent_searches_widget() {
+        public function register_recent_searches_widget()
+        {
     
             // Page load
             add_action( 'template_redirect', array( &$this, 'template_redirect' ) );
@@ -256,7 +257,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             );
         }
     }
-    // Class Ends //
+    // ** Class Ends ** //
+
     
     // Add functions from WP2.8 for previous WP versions
     if ( !function_exists( 'esc_html' ) ) {
@@ -278,7 +280,10 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             
             global $wp_rewrite;
 
-            
+            $permastruct = $wp_rewrite->get_search_permastruct();
+            $link;
+            $search;
+
             if ( empty($query) ) {
                 $search = get_search_query();
             }
@@ -286,8 +291,7 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 $search = stripslashes($query);
             }
             
-            $permastruct = $wp_rewrite->get_search_permastruct();
-            $link;
+
             if ( empty( $permastruct ) ) {
 
                 if( get_search_query() ) {
@@ -309,13 +313,14 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
             } else {
                 $search = urlencode($search);
-                var_dump($search);
+
                 $search = str_replace('%2F', '/', $search); // %2F(/) is not valid within a URL, send it unencoded.
                 
                 $link = str_replace( '%search%', $search, $permastruct );
 
-                $link = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $link, 'search' );
-                // $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                // $link = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $link, 'search' );
+                $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+
             }
 
             return apply_filters( 'search_link', $link, $search );
