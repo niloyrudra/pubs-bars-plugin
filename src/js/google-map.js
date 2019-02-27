@@ -27,8 +27,8 @@ function initMap() {
   var options = {
     center: mapPosition,
     zoom: 8,
-    // mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
-    // mapTypeId: 'roadmap'
+    mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+    mapTypeId: 'roadmap'
   }
 
   map = new google.maps.Map( mapDiv, options );
