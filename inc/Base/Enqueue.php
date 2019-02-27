@@ -15,6 +15,7 @@
 namespace Inc\Base;
 
 
+
 class Enqueue
 {
 
@@ -63,7 +64,7 @@ class Enqueue
             // wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?key=' . $API . '&callback=initMap' );
     
             add_filter( 'script_loader_tag', [ $this, 'make_script_async' ], 10, 3 );
-        
+            
         }
 
 
@@ -78,6 +79,7 @@ class Enqueue
         add_filter( 'script_loader_tag', [ $this, 'make_script_async_two' ], 10, 3 );
 
         // ***** //
+        // global $bar_collections;
         wp_localize_script( 'custom-js', 'barsData', [
             'root_url'      => get_site_url()
         ] );

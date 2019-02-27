@@ -6,47 +6,58 @@
 
 get_header();
 
-// if( function_exists( 'pbp_search_results_by_distance' ) && ! empty( pbp_search_results_by_distance() ) ) {
+if( isset( $_GET[ 'addressInput' ] ) && $_GET[ 'addressInput' ] !== '' ) {
 
-//     $results = pbp_search_results_by_distance();
+    $location = sanitize_text_field( $_GET[ 'addressInput' ] );
 
-// }
-global $wpdb;
-$location = esc_sql( $_GET[ 'addressInput' ] );
-$query = "$location%";
-// $results = $wpdb->get_results( "SELECT wp_postmeta.meta_id,wp_postmeta.post_id FROM wp_postmeta WHERE wp_postmeta.meta_key = '_pbp_city_key' AND wp_postmeta.meta_value LIKE '$query'" );
-// $results = $wpdb->get_results( "SELECT * FROM wp_posts WHERE wp_posts.post_type = 'bars' AND wp_posts.post_title LIKE '$query'", OBJECT );
+    /** */
+    $args = [
+        'post_type' => 'bars',
+        'posts_per_page' => -1,
+        'meta_query'    => [
+            'relation'  => 'OR',
+            [
+                'key'     => '_pbp_city_key',
+                'value'   => $location,
+                'compare' => 'LIKE',
+            ],
+            [
+                'key'     => '_pbp_country_key', 
+                'value'   => $location,
+                'compare' => 'LIKE',
+            ]
+        ]
+    ];
 
-/** */
-$args = [
-    'post_type' => 'bars',
-    'posts_per_page' => -1,
-    'meta_query'    => [
-        'relation'  => 'OR',
-        [
-            'key'     => '_pbp_city_key',
-            'value'   => $location,
-            'compare' => 'LIKE',
-        ],
-        [
-            'key'     => '_pbp_country_key', 
-            'value'   => $location,
-            'compare' => 'LIKE',
-        ],
-        // array(
-        //     'key'     => '_pbp_postal_code_key', // assumed your meta_key is 'car_model'
-        //     'value'   => sanitize_text_field( $_postal_code ),
-        //     'compare' => 'LIKE', // finds models that matches 'model' from the select field
-        // ),
-        // array(
-        //     'key'     => '_pbp_csc_key', // assumed your meta_key is 'car_model'
-        //     'value'   => sanitize_text_field( $_csc ),
-        //     'compare' => 'LIKE', // finds models that matches 'model' from the select field
-        // )
-    ]
-];
+    $bars_coordinators = new \WP_Query( $args );
 
-$bars_coordinators = new \WP_Query( $args );
+    if( $bars_coordinators->have_posts() ):
+
+        while( $bars_coordinators->have_posts() ):
+            $bars_coordinators->the_post();
+    
+            $name = esc_html( get_the_title() );
+            $link = esc_url( get_the_permalink() );
+            $address = get_post_meta( get_the_id(), '_pbp_address_key', true );
+            $lat = get_post_meta( get_the_id(), '_pbp_latitude_key', true );
+            $lng = get_post_meta( get_the_id(), '_pbp_longitude_key', true );
+    
+            $bar_collections[] = [
+                'name'      => $name,
+                'link'      => $link,
+                'address'   => $address,
+                'lat'       => $lat,
+                'lng'       => $lng
+            ];
+    
+        endwhile;
+    
+    endif;
+
+    $collections = json_encode( $bar_collections );
+
+}
+
 ?>
 
 <div class="pbp-wrapper">
@@ -83,31 +94,14 @@ $bars_coordinators = new \WP_Query( $args );
 
             <div><select id="locationSelect" style="width: 10%; visibility: hidden"></select></div>
             
-            <div id="map" style="width: 100%; height: 400px"></div>
+            <div id="map" style="width: 100%; height: 600px"></div>
             
         </div>
 
         <br><hr><br>
-
-        <?php 
-
-
-            if( $bars_coordinators->have_posts() ):
-                echo '<div style="position:relative;display:grid;grid-template-columns:repeat(3,1fr);grid-gap:1em;">';
-                while( $bars_coordinators->have_posts() ):
-                    $bars_coordinators->the_post();
-
-                    $lat = get_post_meta( get_the_id(), '_pbp_latitude_key', true );
-                    $lng = get_post_meta( get_the_id(), '_pbp_longitude_key', true );
-
-                    echo '<section style="border:1px solid #e1e1e1;"><h2 class="entry-title">' . get_the_title() . '</h2><p>Latitude: ' . $lat . '</p><p>Longitude: ' . $lng . '</p></section>';
-
-                endwhile;
-                echo '</div>';
-            endif;
             
+        <div id="pbp-bar-collections"><?php echo ( $bar_collections ? $collections : '' ); ?></div>
 
-        ?>
 
     </div> <!-- .pbp-container -->
 
