@@ -36,6 +36,34 @@ svg {
 
 }
 
+.pbp-live-search--container {
+    
+    svg {
+        position: relative;
+        height: 46px;
+        width: 46px;
+        display: grid;
+        margin-top: -10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        border: 1px solid #e1e1e1;
+        border-radius: 50%;
+        padding: 9px 8px 8px 9px;
+        transition: all 220ms ease-in;
+        path {
+            transition: all 220ms ease-in;
+        }
+        &:hover,
+        &:focus {
+            background-color: #333;
+            path {
+                fill: #fff;
+            }
+        }
+    }
+
+}
+
 ul {
     &.pbp-list-group{
         li {

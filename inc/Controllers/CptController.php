@@ -369,11 +369,6 @@ class CptController
         $city = get_post_meta( $post_id, '_pbp_city_key', true );
         $country = get_post_meta( $post_id, '_pbp_country_key', true );
         $csc = get_post_meta( $post_id, '_pbp_csc_key', true );
-        // $latitude = get_post_meta( $post_id, '_pbp_latitude_key', true );
-        // $longitude = get_post_meta( $post_id, '_pbp_longitude_key', true );
-        // $website = get_post_meta( $post_id, '_pbp_website_key', true );
-        // $twitter = get_post_meta( $post_id, '_pbp_twitter_key', true );
-        // $facebook = get_post_meta( $post_id, '_pbp_facebook_key', true );
         // $phone_num = get_post_meta( $post_id, '_pbp_phone_num_key', true );
         $feature = get_post_meta( $post_id, '_pbp_feature_key', true );
 
@@ -383,7 +378,7 @@ class CptController
         $country           = isset( $country ) ? $country : '';
         $csc               = isset( $csc ) ? $csc : '';
         // $phone_num         = @$data[ 'phone_num' ] ?? '';
-        $featured          = isset( $feature ) ? __( 'YES', 'pubs-bars-plugin' ) : __( 'NO', 'pubs-bars-plugin' );
+        $featured          = isset( $feature ) ?  __( 'YES', 'pubs-bars-plugin' ) . '<strong>' :  __( 'NO', 'pubs-bars-plugin' );
 
         switch ($column) {
             case 'city':
