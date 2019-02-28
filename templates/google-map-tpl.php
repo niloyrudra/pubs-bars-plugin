@@ -73,7 +73,7 @@ if( isset( $_GET[ 'addressInput' ] ) && $_GET[ 'addressInput' ] !== '' ) {
                 <form action="" method="get">
 
                     <label for="raddressInput">Search location:</label>
-                    <input type="text" id="addressInput" name="addressInput" size="15"/>
+                    <input type="text" id="addressInput" name="addressInput" placeholder="<?php ( @$_GET[ 'addressInput' ] ? esc_attr_e( $_GET[ 'addressInput' ] ) : _e( 'Type a location', 'pubs-bars-plugin' ) ); ?>" size="15"/>
 
                     <label for="radiusSelect">Radius:</label>
                     <select id="radiusSelect" name="radiusSelect" label="Radius">
@@ -83,10 +83,11 @@ if( isset( $_GET[ 'addressInput' ] ) && $_GET[ 'addressInput' ] !== '' ) {
                         <option value="10">10 kms</option>
                     </select>
 
-                    <svg id="pbp-search--icon">
+                    <!-- <svg id="pbp-search--icon">
                         <path style="line-height:normal;text-indent:0;text-align:middle;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal" d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible"/>
+                    </svg> -->
+                    
                         <input type="submit" id="searchButton" value="Search" class="btn btn-primary" />
-                    </svg>
 
                 </form>
 
