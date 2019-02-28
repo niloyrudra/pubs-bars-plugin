@@ -13,11 +13,10 @@ var locationSelect;
 
 
 function initMap() {
+  
+  // Collecting Data
   var barCollections = document.getElementById( 'pbp-bar-collections' ).innerHTML;
-  var data = JSON.parse( barCollections );
-  
-  console.log(data);
-  
+  var data = JSON.parse( barCollections );  
 
   // var mapPosition = {lat: -33.863276, lng: 151.107977}; // Sydney Location
   var mapPosition = {lat: 51.5074, lng: -0.1278}; // London Location
@@ -26,7 +25,8 @@ function initMap() {
 
   var options = {
     center: mapPosition,
-    zoom: 8,
+    zoom: 4,
+    gestureHandling: 'greedy',
     mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
     mapTypeId: 'roadmap'
   }

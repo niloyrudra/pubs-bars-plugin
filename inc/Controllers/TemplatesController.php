@@ -18,11 +18,11 @@ class TemplatesController
     {
 
         $this->templates = [ 
-            'templates/advanced-searchform-tpl.php' => __( 'Advanced Search Form Template', 'pubs-bars-plugin' ),
+            // 'templates/advanced-searchform-tpl.php' => __( 'Advanced Search Form Template', 'pubs-bars-plugin' ),
             // 'templates/search-tpl.php' => __( 'Search Template', 'pubs-bars-plugin' ),
             // 'templates/single-letter-serach-tpl.php' => __( 'Single Letter Search Template', 'pubs-bars-plugin' ),
             // 'templates/custom-search-tpl.php' => __( 'Custom Search Template', 'pubs-bars-plugin' ),
-            'templates/google-map-bar-finder-tpl.php' => __( 'Bars\' Location Tracker Template', 'pubs-bars-plugin' ),
+            'templates/google-map-tpl.php' => __( 'Bars\' Location Tracker Template', 'pubs-bars-plugin' ),
         ];
 
         add_filter( 'theme_page_templates', array( $this, 'custom_templates' ) );

@@ -94,7 +94,7 @@ if( isset( $_GET[ 'addressInput' ] ) && $_GET[ 'addressInput' ] !== '' ) {
 
             <div><select id="locationSelect" style="width: 10%; visibility: hidden"></select></div>
             
-            <div id="map" style="width: 100%; height: 600px"></div>
+            <div id="map" class="pbp-map"></div>
             
         </div>
 

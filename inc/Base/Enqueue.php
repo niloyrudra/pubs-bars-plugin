@@ -53,7 +53,7 @@ class Enqueue
         wp_enqueue_script( 'front-jQuery-file', 'https://code.jquery.com/jquery.js' );
             
 
-        if( is_page_template( 'templates/google-map-bar-finder-tpl.php' ) ) {
+        if( is_page_template( 'templates/google-map-tpl.php' ) ) {
            
             // Enqueue initMap Function js File
             wp_enqueue_script( 'google-map-init-func', PLUGIN_URL . '/assets/js/google-map.min.js' );
@@ -79,7 +79,6 @@ class Enqueue
         add_filter( 'script_loader_tag', [ $this, 'make_script_async_two' ], 10, 3 );
 
         // ***** //
-        // global $bar_collections;
         wp_localize_script( 'custom-js', 'barsData', [
             'root_url'      => get_site_url()
         ] );
