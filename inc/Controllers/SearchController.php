@@ -39,6 +39,10 @@ class SearchController
         $vars[] = 'country';
         $vars[] = 'csc';
         $vars[] = 'postcode';
+        // $vars[] = 'pbp_city';
+        // $vars[] = 'pbp_country';
+        // $vars[] = 'pbp_csc';
+        // $vars[] = 'pbp_postal_code';
         $vars[] = 'phone-num';
 
         return $vars;
@@ -158,6 +162,10 @@ class SearchController
         add_rewrite_tag( '%csc%', '([^&]+)' );
         add_rewrite_tag( '%postcode%', '([^&]+)' );
         add_rewrite_tag( '%phone-num%', '([^&]+)' );
+        // add_rewrite_tag( '%pbp_city%', '([^&]+)' );
+        // add_rewrite_tag( '%pbp_country%', '([^&]+)' );
+        // add_rewrite_tag( '%pbp_csc%', '([^&]+)' );
+        // add_rewrite_tag( '%pbp_postal_code%', '([^&]+)' );
     }
     
     /**
@@ -168,7 +176,6 @@ class SearchController
     public function pbp_rewrite_rule()
     {
         // Custom Post Archive
-        // add_rewrite_rule( '^bars/([^/]*)/?', 'index.php?s=$matches[1]','top' );
         add_rewrite_rule( '^bars/city/([^/]*)/?', 'index.php?post_type=bars&city=$matches[1]','top' );
         add_rewrite_rule( '^bars/country/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]','top' );
         add_rewrite_rule( '^bars/csc/([^/]*)/?', 'index.php?post_type=bars&csc=$matches[1]','top' );
@@ -177,6 +184,14 @@ class SearchController
         add_rewrite_rule( '^bars/country/city/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
         add_rewrite_rule( '^bars/country/([^/]*)/city/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
         add_rewrite_rule( '^bars/([^/]*)/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
+        
+        // add_rewrite_rule( '^search/country/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=&pbp_country=$matches[1]&pbp_csc=&pbp_postal_code=','top' );
+        // add_rewrite_rule( '^search/city/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=$matches[1]&pbp_country=&pbp_csc=&pbp_postal_code=','top' );
+        // add_rewrite_rule( '^search/csc/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=$matches[1]&pbp_postal_code=','top' );
+        // add_rewrite_rule( '^search/postcode/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=$matches[1]','top' );
+        
+        // flush_rewrite_rules(false);
+
     }
     
 

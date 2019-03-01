@@ -41,11 +41,12 @@ function initMap() {
   // Array of Markers
   var markers = [];
 
-  if( data && radius !== '' ) {
-
+  if( data && data.length > 0 ) {
     // Need a better API To Work
     // searchLocations();
-    if( radius ) {
+
+    if( radius && radius !== '' ) {
+
       var bars = data.filter( bar => ( 3959 * Math.acos(Math.sin(mapPosition.lat)*Math.sin(bar.lat)+Math.cos(mapPosition.lat)*Math.cos(bar.lat)*Math.cos(mapPosition.lng - bar.lng)) ) < parseFloat(radius) );
 
       if( bars.length > 0 ) {
@@ -68,35 +69,24 @@ function initMap() {
 
     }
 
-
-
-  }
-
-  if( data && radius === '' ) {
-
-    // Need a better API To Work
-    // searchLocations();
-
-    if( data.length > 0 ) {
-
-      for (let i = 0; i < data.length; i++) {
-        markers[i] = {
-            coords: { lat: parseFloat( data[i].lat ), lng: parseFloat( data[i].lng ) },
-            content: `<h2><a href="${data[i].link}" target="_blank" role="bookmark">${data[i].name}</a></h2><p>${data[i].address}</p>`
+    for (let i = 0; i < data.length; i++) {
+      markers[i] = {
+        coords: { lat: parseFloat( data[i].lat ), lng: parseFloat( data[i].lng ) },
+        content: `<h2><a href="${data[i].link}" target="_blank" role="bookmark">${data[i].name}</a></h2><p>${data[i].address}</p>`
             
-        };
+      };
         
-      }
+    }
   
       // Loop Through Markers
-      for (let index = 0; index < markers.length; index++) {
-        addMarker( markers[index] );
-      }
-
+    for (let index = 0; index < markers.length; index++) {
+      addMarker( markers[index] );
     }
 
 
+
   }
+
 
 
   // Add Marker Function
