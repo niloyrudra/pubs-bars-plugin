@@ -41,19 +41,48 @@ function initMap() {
   // Array of Markers
   var markers = [];
 
-  if( data && radius ) {
+  if( data && radius !== '' ) {
+
+    // Need a better API To Work
+    // searchLocations();
+    if( radius ) {
+      var bars = data.filter( bar => ( 3959 * Math.acos(Math.sin(mapPosition.lat)*Math.sin(bar.lat)+Math.cos(mapPosition.lat)*Math.cos(bar.lat)*Math.cos(mapPosition.lng - bar.lng)) ) < parseFloat(radius) );
+
+      if( bars.length > 0 ) {
+  
+        for (let i = 0; i < bars.length; i++) {
+          markers[i] = {
+              coords: { lat: parseFloat( bars[i].lat ), lng: parseFloat( bars[i].lng ) },
+              content: `<h2><a href="${bars[i].link}" target="_blank" role="bookmark">${bars[i].name}</a></h2><p>${bars[i].address}</p>`
+              
+          };
+          
+        }
+    
+        // Loop Through Markers
+        for (let index = 0; index < markers.length; index++) {
+          addMarker( markers[index] );
+        }
+  
+      }
+
+    }
+
+
+
+  }
+
+  if( data && radius === '' ) {
 
     // Need a better API To Work
     // searchLocations();
 
-    var bars = data.filter( bar => ( 3959 * Math.acos(Math.sin(mapPosition.lat)*Math.sin(bar.lat)+Math.cos(mapPosition.lat)*Math.cos(bar.lat)*Math.cos(mapPosition.lng - bar.lng)) ) < parseFloat(radius) );
+    if( data.length > 0 ) {
 
-    if( bars.length > 0 ) {
-
-      for (let i = 0; i < bars.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         markers[i] = {
-            coords: { lat: parseFloat( bars[i].lat ), lng: parseFloat( bars[i].lng ) },
-            content: `<h2><a href="${bars[i].link}" target="_blank" role="bookmark">${bars[i].name}</a></h2><p>${bars[i].address}</p>`
+            coords: { lat: parseFloat( data[i].lat ), lng: parseFloat( data[i].lng ) },
+            content: `<h2><a href="${data[i].link}" target="_blank" role="bookmark">${data[i].name}</a></h2><p>${data[i].address}</p>`
             
         };
         

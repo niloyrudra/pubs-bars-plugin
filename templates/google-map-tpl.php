@@ -95,6 +95,7 @@ if( isset( $_GET[ 'addressInput' ] ) && $_GET[ 'addressInput' ] !== '' ) {
                     <select id="radiusSelect" name="radiusSelect" label="Radius">
                     <?php
                         $distence_arr = [ 10000, 7500, 5000, 4000, 3000, 2000, 1800, 1500, 1200, 1000, 900, 750, 500, 300, 200, 180, 160, 145, 130, 115, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 ];
+                        echo '<option value="" ' . ( @$_GET[ 'radiusSelect' ] == '' ? 'selected' : '' ) . ' default>' . __( 'Select a Radius...' ) . '</option>';
                         foreach ( $distence_arr as $distence ) {
                             echo '<option value="' . $distence . '" ' . ( @$_GET[ 'radiusSelect' ] == $distence ? 'selected' : '' ) . '>' . $distence . ' kms</option>';
                         }
