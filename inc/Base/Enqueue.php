@@ -59,7 +59,8 @@ class Enqueue
             wp_enqueue_script( 'google-map-init-func', PLUGIN_URL . '/assets/js/google-map.min.js' );
                 
             // Enqueuing Google API Key
-            $API = 'AIzaSyDxzkVnPv1w97W88F4H6fFcbZhKWAhBwTo';
+            // $API = 'AIzaSyDxzkVnPv1w97W88F4H6fFcbZhKWAhBwTo';
+            $API = 'AIzaSyDMofJQCY0Gb1lm2k1DcL3TX_kcnHJLiZI';
             wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=' . $API );
             // wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?key=' . $API . '&callback=initMap' );
     
