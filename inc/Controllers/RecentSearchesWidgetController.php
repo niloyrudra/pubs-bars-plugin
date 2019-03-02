@@ -352,26 +352,26 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
                 $search = str_replace('%2F', '/', $search); // %2F(/) is not valid within a URL, send it unencoded.
                 
-                $link = str_replace( '%search%', $search, $permastruct );
-                $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                // if( get_search_query() ) {
-                // }
-                // if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                //     $link = str_replace( '%search%/%city%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search/city' );
-                // }
-                // if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                //     $link = str_replace( '%search%%country%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search/country' );
-                // }
-                // if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                //     $link = str_replace( '%search%%csc%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search/csc' );
-                // }
-                // if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                //     $link = str_replace( '%search%%postcode%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search/postcode' );
-                // }
+                if( get_search_query() ) {
+                    $link = str_replace( '%search%', $search, $permastruct );
+                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                }
+                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
+                    $link = str_replace( '%search%', $search, $permastruct );
+                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                }
+                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
+                    $link = str_replace( '%search%', $search, $permastruct );
+                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                }
+                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
+                    $link = str_replace( '%search%', $search, $permastruct );
+                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                }
+                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
+                    $link = str_replace( '%search%', $search, $permastruct );
+                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                }
                 
             }
 
