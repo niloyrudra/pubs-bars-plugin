@@ -1,7 +1,6 @@
 @import './modules/liveSearchTpl';
 @import './modules/search-template-form.scss';
 @import './modules/search-location-form.scss';
-@import './modules/defaultSearchTpl.scss';
 
 
 svg {
@@ -126,4 +125,6 @@ form{
 .pbp-map {
     width: 100%;
     height: 600px;
+    box-sizing: border-box;
+    margin-bottom: 50px;
 }

@@ -70,10 +70,10 @@ class AdvanceSearchFormWidgetController extends WP_Widget
             <input type="hidden" name="search" value="advanced">
 
             <label for="s" class=""><?php esc_attr_e( 'Search By Name: ', 'pubs-bars-plugin' ); ?></label>
-            <input type="text" value="" placeholder="<?php esc_attr_e( 'Type the Bar Name', 'pubs-bars-plugin' ); ?>" name="s" id="name" />
+            <input type="text" value="" placeholder="<?php esc_attr_e( 'Type the Pub\Bar Name', 'pubs-bars-plugin' ); ?>" name="s" id="name" />
 
             <label for="pbp_city" class=""><?php esc_attr_e( 'Search By City Name: ', 'pubs-bars-plugin' ); ?></label>
-            <input type="text" name="pbp_city" id="pbp_city" value="" class="search-form" placeholder="<?php esc_attr_e( 'Type the Bar Name', 'pubs-bars-plugin' ); ?>">
+            <input type="text" name="pbp_city" id="pbp_city" value="" class="search-form" placeholder="<?php esc_attr_e( 'Type the City Name', 'pubs-bars-plugin' ); ?>">
 
             <label for="pbp_country" class=""><?php esc_attr_e( 'Search By Country Name: ', 'pubs-bars-plugin' ); ?></label>
             <input type="text" name="pbp_country" id="pbp_country" value="" class="search-form" placeholder="<?php esc_attr_e( 'Type the Country Name', 'pubs-bars-plugin' ); ?>">

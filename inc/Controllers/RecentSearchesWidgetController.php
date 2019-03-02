@@ -20,10 +20,13 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
         {
     
             // Page load
-            add_action( 'template_redirect', array( &$this, 'template_redirect' ) );
+            add_action( 'template_redirect', [ &$this, 'template_redirect' ] );
     
             // Widgets initialization
-            add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
+            add_action( 'widgets_init', [ &$this, 'widgets_init' ] );
+        
+            // add_filter( 'widget_display_callback', [ $this, 'custom_display_callback' ], 50, 3 );
+        
         }
     
         // Page load
@@ -270,6 +273,20 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 'nofollow' => true,
             );
         }
+
+
+        // Scopping widget from displaying other pages
+        public function custom_display_callback( $instance, $widget, $args ){
+            if( is_search() ){
+                return true;
+            }
+            // if( is_page( 10 ) ){
+            //     return false;
+            // }
+            return $instance;
+        }
+        
+
     }
     // ** Class Ends ** //
 

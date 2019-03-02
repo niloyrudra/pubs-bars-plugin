@@ -39,10 +39,6 @@ class SearchController
         $vars[] = 'country';
         $vars[] = 'csc';
         $vars[] = 'postcode';
-        // $vars[] = 'pbp_city';
-        // $vars[] = 'pbp_country';
-        // $vars[] = 'pbp_csc';
-        // $vars[] = 'pbp_postal_code';
         $vars[] = 'phone-num';
 
         return $vars;
@@ -75,24 +71,24 @@ class SearchController
 
                 $meta_query = array(
                                     array(
-                                        'key'     => '_pbp_city_key', // assumed your meta_key is 'car_model'
+                                        'key'     => '_pbp_city_key', // assumed your meta_key is '_pbp_city_key'
                                         'value'   => sanitize_text_field( $_city ),
-                                        'compare' => 'LIKE', // finds models that matches 'model' from the select field
+                                        'compare' => 'LIKE', // finds models that matches '$_city' from the select field
                                     ),
                                     array(
-                                        'key'     => '_pbp_country_key', // assumed your meta_key is 'car_model'
+                                        'key'     => '_pbp_country_key', // assumed your meta_key is '_pbp_country_key'
                                         'value'   => sanitize_text_field( $_country ),
-                                        'compare' => 'LIKE', // finds models that matches 'model' from the select field
+                                        'compare' => 'LIKE', // finds models that matches '$_country' from the select field
                                     ),
                                     array(
-                                        'key'     => '_pbp_postal_code_key', // assumed your meta_key is 'car_model'
+                                        'key'     => '_pbp_postal_code_key', // assumed your meta_key is '_pbp_postal_code_key'
                                         'value'   => sanitize_text_field( $_postal_code ),
-                                        'compare' => 'LIKE', // finds models that matches 'model' from the select field
+                                        'compare' => 'LIKE', // finds models that matches '$_postal_code' from the select field
                                     ),
                                     array(
-                                        'key'     => '_pbp_csc_key', // assumed your meta_key is 'car_model'
+                                        'key'     => '_pbp_csc_key', // assumed your meta_key is '_pbp_csc_key'
                                         'value'   => sanitize_text_field( $_csc ),
-                                        'compare' => 'LIKE', // finds models that matches 'model' from the select field
+                                        'compare' => 'LIKE', // finds models that matches '$_csc' from the select field
                                     )
                                 );
 
@@ -156,16 +152,11 @@ class SearchController
 
     public function pbp_rewrite_tag()
     {
-        // add_rewrite_tag( '%bar%', '([^&]+)' );
         add_rewrite_tag( '%city%', '([^&]+)' );
         add_rewrite_tag( '%country%', '([^&]+)' );
         add_rewrite_tag( '%csc%', '([^&]+)' );
         add_rewrite_tag( '%postcode%', '([^&]+)' );
         add_rewrite_tag( '%phone-num%', '([^&]+)' );
-        // add_rewrite_tag( '%pbp_city%', '([^&]+)' );
-        // add_rewrite_tag( '%pbp_country%', '([^&]+)' );
-        // add_rewrite_tag( '%pbp_csc%', '([^&]+)' );
-        // add_rewrite_tag( '%pbp_postal_code%', '([^&]+)' );
     }
     
     /**
@@ -185,13 +176,6 @@ class SearchController
         add_rewrite_rule( '^bars/country/([^/]*)/city/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
         add_rewrite_rule( '^bars/([^/]*)/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
         
-        // add_rewrite_rule( '^search/country/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=&pbp_country=$matches[1]&pbp_csc=&pbp_postal_code=','top' );
-        // add_rewrite_rule( '^search/city/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=$matches[1]&pbp_country=&pbp_csc=&pbp_postal_code=','top' );
-        // add_rewrite_rule( '^search/csc/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=$matches[1]&pbp_postal_code=','top' );
-        // add_rewrite_rule( '^search/postcode/([^/]*)/?', 'search.php?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=$matches[1]','top' );
-        
-        // flush_rewrite_rules(false);
-
     }
     
 
