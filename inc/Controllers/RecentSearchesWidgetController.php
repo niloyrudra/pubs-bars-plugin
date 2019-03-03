@@ -258,7 +258,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
         }
     
         // Make string lowercase
-        function strtolower( $str ) {
+        function strtolower( $str )
+        {
             if ( function_exists( 'mb_strtolower' ) ) {
                 return mb_strtolower( $str );
             } else {
@@ -266,7 +267,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             }
         }
     
-        function get_default_options() {
+        function get_default_options()
+        {
             return array(
                 'title' => '',
                 'max' => 5,
@@ -276,7 +278,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
 
         // Scopping widget from displaying other pages
-        public function custom_display_callback( $instance, $widget, $args ){
+        public function custom_display_callback( $instance, $widget, $args )
+        {
             if( is_search() ){
                 return true;
             }
@@ -292,20 +295,23 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
     
     // Add functions from WP2.8 for previous WP versions
-    if ( !function_exists( 'esc_html' ) ) {
+    if ( !function_exists( 'esc_html' ) )
+    {
         function esc_html( $text ) {
             return wp_specialchars( $text );
         }
     }
     
-    if ( !function_exists( 'esc_attr' ) ) {
+    if ( !function_exists( 'esc_attr' ) )
+    {
         function esc_attr( $text ) {
             return attribute_escape( $text );
         }
     }
     
     // Add functions from WP3.0 for previous WP versions
-    if ( !function_exists( 'get_search_link' ) ) {
+    if ( !function_exists( 'get_search_link' ) )
+    {
 
         function get_search_link( $query = '' ) {
             
@@ -317,8 +323,23 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
             if ( empty($query) ) {
 
-                $search = get_search_query();
-
+                
+                if( get_search_query() ) {
+                    $search = get_search_query();
+                }
+                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
+                    $search = sanitize_test_field($_GET[ 'pbp_city' ]);
+                }
+                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
+                    $search = sanitize_test_field($_GET[ 'pbp_country' ]);
+                }
+                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
+                    $search = sanitize_test_field($_GET[ 'pbp_csc' ]);
+                }
+                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
+                    $search = sanitize_test_field($_GET[ 'pbp_postal_code' ]);
+                }
+                
             }
             else{
                 
@@ -329,21 +350,21 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
             if ( empty( $permastruct ) ) {
 
-                if( get_search_query() ) {
-                    $link = home_url('?s=' . urlencode($search) );
-                }
-                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                    $link = home_url('?s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
-                }
-                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country='  . urlencode($search) . '&pbp_csc=&pbp_postal_code=' );
-                }
-                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc='  . urlencode($search) . '&pbp_postal_code=' );
-                }
-                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=' . urlencode($search) );
-                }
+                $link = home_url('?s=' . urlencode($search) );
+                // if( get_search_query() ) {
+                // }
+                // if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
+                //     $link = home_url('?s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
+                // }
+                // if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
+                //     $link = home_url('?search=advanced&s=&pbp_city=&pbp_country='  . urlencode($search) . '&pbp_csc=&pbp_postal_code=' );
+                // }
+                // if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
+                //     $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc='  . urlencode($search) . '&pbp_postal_code=' );
+                // }
+                // if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
+                //     $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=' . urlencode($search) );
+                // }
                 
 
             } else {
@@ -352,26 +373,26 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
                 $search = str_replace('%2F', '/', $search); // %2F(/) is not valid within a URL, send it unencoded.
                 
-                if( get_search_query() ) {
-                    $link = str_replace( '%search%', $search, $permastruct );
-                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                }
-                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                    $link = str_replace( '%search%', $search, $permastruct );
-                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                }
-                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                    $link = str_replace( '%search%', $search, $permastruct );
-                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                }
-                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                    $link = str_replace( '%search%', $search, $permastruct );
-                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                }
-                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                    $link = str_replace( '%search%', $search, $permastruct );
-                    $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                }
+                $link = str_replace( '%search%', $search, $permastruct );
+                $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                // if( get_search_query() ) {
+                // }
+                // if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
+                //     $link = str_replace( '%search%', $search, $permastruct );
+                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                // }
+                // if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
+                //     $link = str_replace( '%search%', $search, $permastruct );
+                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                // }
+                // if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
+                //     $link = str_replace( '%search%', $search, $permastruct );
+                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                // }
+                // if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
+                //     $link = str_replace( '%search%', $search, $permastruct );
+                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
+                // }
                 
             }
 
