@@ -324,21 +324,7 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             if ( empty($query) ) {
 
                 
-                if( get_search_query() ) {
-                    $search = get_search_query();
-                }
-                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                    $search = sanitize_test_field($_GET[ 'pbp_city' ]);
-                }
-                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                    $search = sanitize_test_field($_GET[ 'pbp_country' ]);
-                }
-                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                    $search = sanitize_test_field($_GET[ 'pbp_csc' ]);
-                }
-                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                    $search = sanitize_test_field($_GET[ 'pbp_postal_code' ]);
-                }
+                $search = get_search_query();
                 
             }
             else{
@@ -350,21 +336,21 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
             if ( empty( $permastruct ) ) {
 
-                $link = home_url('?s=' . urlencode($search) );
-                // if( get_search_query() ) {
-                // }
-                // if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                //     $link = home_url('?s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
-                // }
-                // if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                //     $link = home_url('?search=advanced&s=&pbp_city=&pbp_country='  . urlencode($search) . '&pbp_csc=&pbp_postal_code=' );
-                // }
-                // if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                //     $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc='  . urlencode($search) . '&pbp_postal_code=' );
-                // }
-                // if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                //     $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=' . urlencode($search) );
-                // }
+                if( get_search_query() ) {
+                    $link = home_url('?s=' . urlencode($search) );
+                }
+                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
+                    $link = home_url('?s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
+                }
+                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
+                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country='  . urlencode($search) . '&pbp_csc=&pbp_postal_code=' );
+                }
+                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
+                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc='  . urlencode($search) . '&pbp_postal_code=' );
+                }
+                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
+                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=' . urlencode($search) );
+                }
                 
 
             } else {
@@ -375,24 +361,6 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 
                 $link = str_replace( '%search%', $search, $permastruct );
                 $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                // if( get_search_query() ) {
-                // }
-                // if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                //     $link = str_replace( '%search%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                // }
-                // if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                //     $link = str_replace( '%search%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                // }
-                // if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                //     $link = str_replace( '%search%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                // }
-                // if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                //     $link = str_replace( '%search%', $search, $permastruct );
-                //     $link = trailingslashit( esc_url( site_url() ) ) . user_trailingslashit( $link, 'search' );
-                // }
                 
             }
 
