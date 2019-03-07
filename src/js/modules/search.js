@@ -27,12 +27,10 @@ class Search {
     }
 
     // Methods
-    // buttonClikedDispatcher = async ( e ) => {
     buttonClikedDispatcher( e ) {
         if( e.target == this.searchButton ) {
             this.searchButtonTriggered = true;
             this.getResults();
-            // this.searchField.value = '';
         }
     }
 
@@ -44,7 +42,6 @@ class Search {
                 clearTimeout( this.setTimer );
                 this.setTimer = setTimeout( () => {
                     this.getResults();
-                    // this.searchField.value = '';
                 }, 2000 );
             }
 
@@ -53,6 +50,8 @@ class Search {
     }
 
     getResults() {
+
+    console.log(barsData.root_url);
 
         fetch( 'http://pubsbarsplugin.local/wp-json/pubs-bars-plugin/v1/bars/' + this.searchField.value )
         .then( res => res.json() )
@@ -68,7 +67,7 @@ class Search {
                                 <p>${item.city}</p>
                             </div>
                             `;
-                        } );
+                        } ).join('');
                     }
                     else {
                         this.outputResults += `

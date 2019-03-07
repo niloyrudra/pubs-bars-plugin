@@ -25,67 +25,18 @@ class LiveSearch {
 
         if( this.searchForm ) {
             this.searchField.addEventListener( 'keyup', this.keyPressDispatcher.bind(this) );
-            this.searchForm.addEventListener( 'submit', this.renderSearchResults.bind(this) );
         }
         
     }
 
-    renderSearchResults( event )
-    {
-        this.formSubmitted = true;
-        this.getResults();
-
-        // if( this.jsonData ) {
-
-        //     let output;
-
-        //     if( this.jsonData.length > 1 ) {
-        //         for( let i = 0; i < this.jsonData.length -1; i++ ) {
-        //             output +=`<h3 class="entry-title"><a href="${this.jsonData[i].permalink}" target="_blank" role="bookmark">${this.jsonData[i].title}</a></h3><p>${this.jsonData[i].content}</p>`;
-        //         }
-        //         // this.jsonData.map( bars => {
-        //         //     output +=`
-        //         //         ${bars.map( item => `
-        //         //                 <h3 class="entry-title"><a href="${item.permalink}" target="_blank" role="bookmark">${item.title}</a></h3>
-        //         //                 <p>${item.content}</p>
-        //         //         ` )}
-        //         //     `;
-        //         // } );
-
-        //     }else{
-
-        //         output +=`<h3 class="entry-title"><a href="${this.jsonData.permalink}" target="_blank" role="bookmark">${this.jsonData.title}</a></h3><p>${this.jsonData.content}</p>`;
-        //     }
-
-
-        //     if( this.searchResultContainer ) {
-        //         if( this.searchField.value != '' ){
-        //             this.pageHeaderTitle.innerHTML = this.searchField.value;
-        //             this.searchResultContainer.innerHTML = output;
-        //         }else{
-        //             this.pageHeaderTitle.innerHTML = '';
-        //             this.searchResultContainer.innerHTML = '';
-        //         }
-
-        //     }
-
-
-        // }
-
-
-    }
 
     keyPressDispatcher() {
 
-        // if( !this.formSubmitted ) {
-            if( this.searchField.value !== this.previousValue ) {
-                clearTimeout( this.setTimer );
-                this.searchResultContainer.innerHTML = '';
-                this.setTimer = setTimeout( () => this.getResults(), 1200 );
-            }
-
-        // }
-
+        if( this.searchField.value !== this.previousValue ) {
+            clearTimeout( this.setTimer );
+            this.searchResultContainer.innerHTML = '';
+            this.setTimer = setTimeout( () => this.getResults(), 750 );
+        }
 
     }
 
@@ -105,12 +56,7 @@ class LiveSearch {
 
                 if( data.bars.length ) {
 
-                    // this.jsonData.push(data.bars);
-                    // this.jsonData = data.bars;
-
-                    outputResults +=`
-                        ${data.bars.map( item => `<h3 class="entry-title"><a href="${item.permalink}" target="_blank" role="bookmark">${item.title}</a></h3><p>${item.content}</p>` )}
-                    `;
+                    outputResults += data.bars.map( item => `<h3 class="entry-title"><a href="${item.permalink}" target="_blank" role="bookmark">${item.title}</a></h3><p>${item.content}</p><hr>` ).join('');
 
                 }
                 else {
