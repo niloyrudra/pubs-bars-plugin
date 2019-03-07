@@ -39,7 +39,6 @@ class Enqueue
         // Enqueue Media
         wp_enqueue_media();
         
-        // wp_enqueue_script( 'media-upload-js', PLUGIN_URL . '/assets/js/media-upload.min.js' );
         wp_enqueue_script( 'custom-js', PLUGIN_URL . '/assets/js/main-admin.min.js' );
             
             
@@ -59,8 +58,8 @@ class Enqueue
             wp_enqueue_script( 'google-map-init-func', PLUGIN_URL . '/assets/js/google-map.min.js' );
                 
             // Enqueuing Google API Key
-            // $API = 'AIzaSyDxzkVnPv1w97W88F4H6fFcbZhKWAhBwTo';
-            $API = 'AIzaSyDMofJQCY0Gb1lm2k1DcL3TX_kcnHJLiZI';
+            $API = 'AIzaSyDMofJQCY0Gb1lm2k1DcL3TX_kcnHJLiZI'; // DO NOT FORGET TO REPLACE THIS API KEY INTO VALID/PAID GOOGLE MAP API KEY
+
             wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=' . $API );
             // wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?key=' . $API . '&callback=initMap' );
     
@@ -74,7 +73,6 @@ class Enqueue
         wp_enqueue_style( 'custom-styles', PLUGIN_URL . '/assets/css/style-front.min.css' );
         
         // Enqueuing JS File
-        // wp_enqueue_script( 'geo-location-js', PLUGIN_URL . '/assets/js/geo_location.js' );
         wp_enqueue_script( 'custom-js', PLUGIN_URL . '/assets/js/main-front.min.js', array( 'jquery' ), '1.0.0', true );
     
         add_filter( 'script_loader_tag', [ $this, 'make_script_async_two' ], 10, 3 );

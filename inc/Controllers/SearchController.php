@@ -2,13 +2,15 @@
 
 /**
  * 
- *  Search Controller Class
- *
- * Register custom query vars
- *
- * @param array $vars The array of available query variables
+ *  ============================
+ *     Search Controller Class
+ *  ============================
+ *   Register custom query vars
+ *  ============================
  * 
- * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/query_vars
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
+ * 
  */
 
 namespace Inc\Controllers;
@@ -34,7 +36,6 @@ class SearchController
     public function pbp_register_query_vars( $vars )
     {
 
-        // $vars[] = 'bar';
         $vars[] = 'city';
         $vars[] = 'country';
         $vars[] = 'csc';
@@ -49,10 +50,7 @@ class SearchController
      * Build a custom query
      *
      * @param $query obj The WP_Query instance (passed by reference)
-     *
-     * @link https://codex.wordpress.org/Class_Reference/WP_Query
-     * @link https://codex.wordpress.org/Class_Reference/WP_Meta_Query
-     * @link https://codex.wordpress.org/Plugin_API/Action_Reference/pre_get_posts
+     * 
      */
 
     public function pbp_pre_get_posts( $query )
@@ -66,6 +64,7 @@ class SearchController
             $_country = $_GET['pbp_country'] != '' ? $_GET['pbp_country'] : '';
             $_csc = $_GET['pbp_csc'] != '' ? $_GET['pbp_csc'] : '';
             $_postal_code = $_GET['pbp_postal_code'] != '' ? $_GET['pbp_postal_code'] : '';
+            $_address = $_GET['_pbp_address_key'] != '' ? $_GET['_pbp_address_key'] : '';
     
             if( $_city || $_country || $_csc || $_postal_code ) {
 
@@ -89,6 +88,11 @@ class SearchController
                                         'key'     => '_pbp_csc_key', // assumed your meta_key is '_pbp_csc_key'
                                         'value'   => sanitize_text_field( $_csc ),
                                         'compare' => 'LIKE', // finds models that matches '$_csc' from the select field
+                                    ),
+                                    array(
+                                        'key'     => '_pbp_address_key', // assumed your meta_key is '_pbp_address_key'
+                                        'value'   => sanitize_text_field( $_address ),
+                                        'compare' => 'LIKE', // finds models that matches '$_address' from the select field
                                     )
                                 );
 

@@ -3,6 +3,10 @@
 /**
  * 
  *  Rest Api Controller Class
+ *  =========================
+ * 
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 

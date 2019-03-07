@@ -5,8 +5,8 @@
  *  REST API ROUTES REGISTER
  *  =========================
  * 
- * @package pubs-bars-plugin
- * @version 1.0.0
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 
@@ -99,7 +99,9 @@ if( class_exists( 'WP_REST_Controller' ) ):
             $bar_related_meta_keys = [ 
                 '_pbp_city_key',
                 '_pbp_country_key',
-                '_pbp_postal_code_key'
+                '_pbp_postal_code_key',
+                '_pbp_csc_key',
+                '_pbp_phone_num_key',
             ];
 
             $meta_array = array();
@@ -140,6 +142,7 @@ if( class_exists( 'WP_REST_Controller' ) ):
 
             }
 
+            // Filtering for removing duplicate entries
             $search_results[ 'bars' ] = array_values( array_unique( $search_results[ 'bars' ], SORT_REGULAR ) );
 
             return $search_results;

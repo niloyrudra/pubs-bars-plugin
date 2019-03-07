@@ -2,7 +2,12 @@
 
 /**
  * 
+ *  ==============================================
  *  This set file will trigger on Plugin Uninstall
+ *  ==============================================
+ * 
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 

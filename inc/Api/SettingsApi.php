@@ -1,9 +1,12 @@
 <?php
 
 /**
+ *  ===================
+ *      Settings API
+ *  ===================
  * 
- *  Settings API
- *  ===============
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 
@@ -183,20 +186,6 @@ class SettingsApi
             echo '<input type="button" class="button button-secondary" value="Replace Profile Picture" id="upload-button" /><input type="hidden" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="'. $picture .'" /> <input type="button" class="button button-secondary" value="Remove" id="remove-button" />';
     
         }
-        // $name = $args[ 'label_for' ];
-
-        // $value = @$_POST[$name];
-        // var_dump($value);
-        // if( !$value ) {
-
-        //     echo '<span class="pbp-upload-btn-icon"><span class="dashicons dashicons-upload"></span><input type="button" class="button button-secondary" value="Upload a Picture" id="upload-button" /></span><input type="hidden" id="' . $name . '" name="' . $name . '" value="" />';
-
-        // } else {
-
-        //     echo '<span class="pbp-upload-btn-icon"><span class="dashicons dashicons-undo"></span><input type="button" class="button button-secondary" value="Replace Picture" id="upload-button" /></span>
-        //     <span class="pbp-upload-btn-icon"><input type="hidden" id="' . $name . '" name="' . $name . '" value="'. $value .'" /> <span class="dashicons dashicons-trash"></span><input type="button" class="button button-secondary" value="Remove" id="remove-button" /></span>';
-
-        // }
 
     }
 

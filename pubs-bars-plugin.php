@@ -217,40 +217,4 @@ if( class_exists( Inc\Init::class ) ) {
 
     }
 
-    // Func for Search Results by Distance
-    function pbp_search_results_by_distance() {
-
-        // if( isset( $_GET[ 'pbp_search_lat' ] ) && isset( $_GET[ 'pbp_search_lng' ] ) && isset( $_GET[ 'pbp_radius' ] ) ) {
-        if( isset( $_GET[ 'radiusSelect' ] ) ) {
-            
-            global $wpdb;
-
-            $table = $wpdb->prefix . 'bars_zone';
-
-            //$latitude = esc_sql( $_GET[ 'pbp_search_lat' ] );
-            //$longitude = esc_sql( $_GET[ 'pbp_search_lng' ] );
-            //$relation = esc_sql( $_GET[ 'pbp_select' ] );
-            // $radius = esc_sql( $_GET[ 'pbp_radius' ] );
-
-            $radius = $_GET[ 'radiusSelect' ];
-
-            var_dump($radius);
-
-            $limit_low = 0;
-            $limit_high = 20;
-
-            /** For Testing Codes  */
-            // $results = $wpdb->get_results( "SELECT *, ( 3959 * acos( cos( radians(37) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(-122) ) + sin( radians(37) ) * sin( radians( latitude ) ) ) ) AS distance FROM {$table} HAVING distance {$relation} {$radius} ORDER BY distance LIMIT {$limit_low}, {$limit_high}" );
-
-            $results = $wpdb->get_results( "SELECT *, ( 3959 * acos( cos( radians(37) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(-122) ) + sin( radians(37) ) * sin( radians( latitude ) ) ) ) AS distance FROM {$table} HAVING distance > {$radius} ORDER BY distance LIMIT {$limit_low}, {$limit_high}" );
-            
-
-            return $results;
-
-        }
-
-        return array();
-
-    }
-
 }

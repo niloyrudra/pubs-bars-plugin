@@ -1,9 +1,13 @@
 <?php
 
 /**
- * 
- *  Shortcodes Class
- *  =================
+ *  
+ *  ==================
+ *   Shortcodes Class
+ *  ==================
+ *  
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 
@@ -35,7 +39,7 @@ class Shortcodes
     public function search_form_handler( $atts )
     {
         $attributes = shortcode_atts( [
-            'title'     => __( 'Search For Pubs/Bars Near You.', 'pubs-bars-plugin' ),
+            'title'         => __( 'Search For Pubs/Bars Near You.', 'pubs-bars-plugin' ),
             'placeholder'   => __( 'Write Your Query Here...', 'pubs-bars-plugin' )
         ], $atts );
 

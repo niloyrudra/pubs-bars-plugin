@@ -3,6 +3,10 @@
 /**
  * 
  *  Advance Search Form Widget Controller Class
+ *  ============================================
+ * 
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 

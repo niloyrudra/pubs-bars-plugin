@@ -1,8 +1,13 @@
 <?php
 
 /**
+ *  
+ *  =======================================
+ *   Recent Search Widget Controller Class
+ *  =======================================
  * 
- *  Recent Search Widget Controller Class
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 

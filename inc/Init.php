@@ -3,7 +3,10 @@
 /**
  * 
  *  Init Class
- * ===============
+ *  ===============
+ * 
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 
@@ -12,7 +15,7 @@ namespace Inc;
 
 use Inc\Base\Admin;
 use Inc\Base\Enqueue;
-use Inc\Base\Shortcodes;
+// use Inc\Base\Shortcodes;
 use Inc\Base\SettingsActionLinks;
 use Inc\Controllers\CptController;
 use Inc\Controllers\RestApiRoutes;
@@ -30,7 +33,7 @@ final class Init
 
     public $enqueue;
     public $rest_api;
-    public $shortcodes;
+    // public $shortcodes;
     public $rest_routes;
     public $rct_scr_wdgt;
     public $db_controller;

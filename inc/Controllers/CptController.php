@@ -3,6 +3,10 @@
 /**
  * 
  *  Custom Post Type Controller Class
+ *  =================================
+ *  
+ *  @package pubs-bars-plugin
+ *  @version 1.0.0
  * 
  */
 
@@ -36,34 +40,33 @@ class CptController
 
         register_post_type( 'bars', [
             'labels'                => [
-                'name'                      => __( 'Bars', 'pubs-bars-plugin' ),
-                'singular_name'             => __( 'Bar', 'pubs-bars-plugin' ),
-                'plural_name'               => __( 'Bars', 'pubs-bars-plugin' ),
-                'menu_name'                 => __( 'Bars', 'pubs-bars-plugin' ),
-                'edit_item'                 => __( 'Edit Bar', 'pubs-bars-plugin' ),
-                'add_new_item'              => __( 'Edit New Bar', 'pubs-bars-plugin' ),
+                'name'                      => __( 'Pubs & Bars', 'pubs-bars-plugin' ),
+                'singular_name'             => __( 'Pub/Bar', 'pubs-bars-plugin' ),
+                'plural_name'               => __( 'Pubs/Bars', 'pubs-bars-plugin' ),
+                'menu_name'                 => __( 'Pubs & Bars', 'pubs-bars-plugin' ),
+                'edit_item'                 => __( 'Edit Pub/Bar', 'pubs-bars-plugin' ),
+                'add_new_item'              => __( 'Edit New Pub/Bar', 'pubs-bars-plugin' ),
                 'add_new'                   => __( 'Add new', 'pubs-bars-plugin' ),
-                'all_items'                 => __( 'All Bars', 'pubs-bars-plugin' ),
-                'new_item'                  => __( 'New Bar', 'pubs-bars-plugin' ),
-                'view_item'                 => __( 'View Bar', 'pubs-bars-plugin' ),
-                'view_items'                => __( 'View Bars', 'pubs-bars-plugin' ),
-                'search_items'              => __( 'Search Bars', 'pubs-bars-plugin' ),
-                'not_found'                 => __( 'No bars found', 'pubs-bars-plugin' ),
-                'not_found_in_trash'        => __( 'No Bars found in trash', 'pubs-bars-plugin' ),
+                'new_item'                  => __( 'New Pub/Bar', 'pubs-bars-plugin' ),
+                'view_item'                 => __( 'View Pub/Bar', 'pubs-bars-plugin' ),
+                'view_items'                => __( 'View Pubs/Bars', 'pubs-bars-plugin' ),
+                'search_items'              => __( 'Search Pubs/Bars', 'pubs-bars-plugin' ),
+                'not_found'                 => __( 'No pubs/bars found', 'pubs-bars-plugin' ),
+                'not_found_in_trash'        => __( 'No Pubs/Bars found in trash', 'pubs-bars-plugin' ),
                 'parent_item_colon'         => __( 'Parent Page:', 'pubs-bars-plugin' ),
-                'all_items'                 => __( 'All Bars', 'pubs-bars-plugin' ),
-                'archives'                  => __( 'Bar Archives', 'pubs-bars-plugin' ),
-                'attributes'                => __( 'Bar Attributes', 'pubs-bars-plugin' ),
-                'insert_into_item'          => __( 'Insert into bar', 'pubs-bars-plugin' ),
-                'uploaded_to_this_item'     => __( 'Uploaded to this bar', 'pubs-bars-plugin' ),
+                'all_items'                 => __( 'All Pubs & Bars', 'pubs-bars-plugin' ),
+                'archives'                  => __( 'Pub/Bar Archives', 'pubs-bars-plugin' ),
+                'attributes'                => __( 'Pub/Bar Attributes', 'pubs-bars-plugin' ),
+                'insert_into_item'          => __( 'Insert into pub/bar', 'pubs-bars-plugin' ),
+                'uploaded_to_this_item'     => __( 'Uploaded to this pub/bar', 'pubs-bars-plugin' ),
                 'featured_image'            => __( 'Featured Image.', 'pubs-bars-plugin' ),
                 'set_featured_image'        => __( 'Set featured image.', 'pubs-bars-plugin' ),
                 'remove_featured_image'     => __( 'Remove featured image.', 'pubs-bars-plugin' ),
                 'use_featured_image'        => __( 'Use as featured image.', 'pubs-bars-plugin' ),
-                'filter_items_list'         => __( 'Filter Bars\' List', 'pubs-bars-plugin' ),
-                'items_list_navigation'     => __( 'Bar List Navigation', 'pubs-bars-plugin' ),
-                'items_list'                => __( 'Bars\' List', 'pubs-bars-plugin' ),
-                'name_admin_bar'            => __( 'Bar', 'pubs-bars-plugin' ),
+                'filter_items_list'         => __( 'Filter Pubs/Bars\' List', 'pubs-bars-plugin' ),
+                'items_list_navigation'     => __( 'Pub/Bar List Navigation', 'pubs-bars-plugin' ),
+                'items_list'                => __( 'Pubs/Bars\' List', 'pubs-bars-plugin' ),
+                'name_admin_bar'            => __( 'Pubs & Bars', 'pubs-bars-plugin' ),
             ],
             'public'                => true,
             'has_archive'           => true,
