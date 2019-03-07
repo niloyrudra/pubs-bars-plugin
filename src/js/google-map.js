@@ -17,6 +17,7 @@ function initMap() {
   // Collecting Data
   var barCollections = document.getElementById( 'pbp-bar-collections' ).innerHTML;
   var radius = document.getElementById("radiusSelect").value;
+  var submitButton = document.getElementById("searchButton");
 
   if( barCollections ) {
     data = JSON.parse( barCollections );
@@ -35,16 +36,22 @@ function initMap() {
   }
 
   map = new google.maps.Map( mapDiv, options );
-
-  // infoWindow = new google.maps.InfoWindow();
   
+
   // Array of Markers
   var markers = [];
 
   if( data && data.length > 0 ) {
-    // Need a better API To Work
-    // searchLocations();
 
+    // Need a better API To Work
+    // This will give a Location Coordinators to use those to find
+    // the location to query for the bars within a certain radius
+    // It will change the mapPosition and take the viewport to the right place
+
+    //submitButton.addEventListener( 'click', searchLocations );
+
+    // This section only gives this bars of a certain City or Country or  an Address
+    // Radius might not work properly here...
     if( radius && radius !== '' ) {
 
       var bars = data.filter( bar => ( 3959 * Math.acos(Math.sin(mapPosition.lat)*Math.sin(bar.lat)+Math.cos(mapPosition.lat)*Math.cos(bar.lat)*Math.cos(mapPosition.lng - bar.lng)) ) < parseFloat(radius) );
@@ -78,16 +85,12 @@ function initMap() {
         
     }
   
-      // Loop Through Markers
+    // Loop Through Markers
     for (let index = 0; index < markers.length; index++) {
       addMarker( markers[index] );
     }
 
-
-
   }
-
-
 
   // Add Marker Function
   function addMarker( props ) {
@@ -121,33 +124,33 @@ function initMap() {
 
   }
 
-  
+  // Search Location Of Given Location in the Search Input Field
+  function searchLocations() {
+
+    var address = document.getElementById("addressInput").value;
+
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ address: address }, function( results, status ) {
+
+      if (status == google.maps.GeocoderStatus.OK) {
+      searchLocationsNear(results[0].geometry.location);
+      } else {
+        alert(address + ' not found');
+      }
+      
+    });
+
+  }
+
+  // Covert Degree To Radian
+  function toRadians(angle) {
+    return angle * (Math.PI / 180);
+  }
+  // Covert Radian To Degree
+  function toDegrees(angle) {
+    return angle * (180 / Math.PI);
+  }
+
 }
 
-// Search Location Of Given Location in the Search Input Field
-function searchLocations() {
-
-  var address = document.getElementById("addressInput").value;
-
-  var geocoder = new google.maps.Geocoder();
-
-  geocoder.geocode({address: address}, function(results, status) {
-
-    if (status == google.maps.GeocoderStatus.OK) {
-     searchLocationsNear(results[0].geometry.location);
-    } else {
-      alert(address + ' not found');
-    }
-    
-  });
-
-}
-
-// Covert Degree To Radian
-function toRadians(angle) {
-  return angle * (Math.PI / 180);
-}
-// Covert Radian To Degree
-function toDegrees (angle) {
-  return angle * (180 / Math.PI);
-}
