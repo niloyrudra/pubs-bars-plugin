@@ -38,9 +38,7 @@ class Enqueue
         
         // Enqueue Media
         wp_enqueue_media();
-        
-        wp_enqueue_script( 'custom-js', PLUGIN_URL . '/assets/js/main-admin.min.js' );
-            
+                    
             
     }
         
@@ -61,7 +59,6 @@ class Enqueue
             $API = 'AIzaSyDMofJQCY0Gb1lm2k1DcL3TX_kcnHJLiZI'; // DO NOT FORGET TO REPLACE THIS API KEY INTO VALID/PAID GOOGLE MAP API KEY
 
             wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=' . $API );
-            // wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?key=' . $API . '&callback=initMap' );
     
             add_filter( 'script_loader_tag', [ $this, 'make_script_async' ], 10, 3 );
             

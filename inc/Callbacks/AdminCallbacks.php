@@ -21,10 +21,4 @@ class AdminCallbacks
         require_once PLUGIN_PATH . '/inc/Pages/admin.php';
     }
 
-    // Admin Database Manager Page Callback Function
-    public function pbp_db_manager()
-    {
-        require_once PLUGIN_PATH . '/inc/Pages/database_manager.php';
-    }
-
 }

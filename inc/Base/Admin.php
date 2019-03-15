@@ -37,9 +37,7 @@ class Admin
         add_menu_page( __( 'Pubs Bars Plugin', 'pubs-bars-plugin' ), __( 'Pubs/Bars Plugin', 'pubs-bars-plugin' ), 'manage_options', 'pubs_bars_plugin', array( $this->admin_callbacks, 'admin_page_init' ), 'dashicons-store', 110 );
 
         add_submenu_page( 'pubs_bars_plugin', __( 'Pubs Bars Settings Page', 'pubs-bars-plugin' ), __( 'Dashboard', 'pubs-bars-plugin' ), 'manage_options', 'pubs_bars_plugin', array( $this->admin_callbacks, 'admin_page_init' ) );
-
-        add_submenu_page( 'pubs_bars_plugin', __( 'Database Section', 'pubs-bars-plugin' ), __( 'DataBase Manager', 'pubs-bars-plugin' ), 'manage_options', 'pubs_bars_db_manager', array( $this->admin_callbacks, 'pbp_db_manager' ) );
-                
+       
     }
 
 

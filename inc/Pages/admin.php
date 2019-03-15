@@ -3,29 +3,11 @@
     <h1>Pubs Bars Plugin</h1>
     <?php settings_errors(); ?>
 
-<hr>
-    <p class="description">Shortcode for Search Form <small><b>Default</b></small> <code>[search-form]</code></p>
-    <p>Shortcode for Search Form <small><b>Standard</b></small> <code>[search-form title="Your Search Form Title" placeholder="Your Search Form Placeholder"]</code></p>
-<hr>
+    <hr>
 
-    <div class="pbp-admin-form-section">
+    <p class="description"><?php _e( 'Shortcode for Search Form ', 'pubs-bars-plugin' ); ?><small><b><?php _e( 'Default', 'pubs-bars-plugin' ); ?></b></small> <code>[search-form]</code></p>
+    <p><?php _e( 'Shortcode for Search Form ', 'pubs-bars-plugin' ); ?><small><b><?php _e( 'Standard', 'pubs-bars-plugin' ); ?></b></small> <code>[search-form title="Your Search Form Title" placeholder="Your Search Form Placeholder"]</code></p>
     
-        <form action="" method="post" class="pbp-general-form">
-        
-            <table class="form-table">
-
-                <tbody>
-
-                    <?php render_fields(); ?>
-                    
-                </tbody>
-                
-            </table>
-
-            <p class="submit"><input type="submit" name="pbp_submit" id="pbp_submit" class="button button-primary" value="Insert"></p>
-
-        </form>
-        
-    </div>
+    <hr>
 
 </div>

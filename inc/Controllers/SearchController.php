@@ -56,6 +56,7 @@ class SearchController
     public function pbp_pre_get_posts( $query )
     {
 
+        // Search Using Advance Search Form
         if ( isset( $_REQUEST['search'] ) && $_REQUEST['search'] == 'advanced' && ! is_admin() && $query->is_search && $query->is_main_query() ) {
 
             $query->set( 'post_type', 'bars' );

@@ -19,13 +19,12 @@ var styleFrontSRC = 'src/scss/style-front.scss';
 var styleDIST = './assets/css';
 var styleWatch = 'src/scss/**/*.scss';
 
-var jsAdmin = 'main-admin.js';
 var jsFront = 'main-front.js';
 var jsGoogleMap = 'google-map.js';
 var jsSRC = 'src/js/';
 var jsDIST = './assets/js';
 var jsWatch = 'src/js/**/*.js';
-var jsFILES = [ jsAdmin, jsFront, jsGoogleMap ];
+var jsFILES = [ jsFront, jsGoogleMap ];
 
 var imgSRC = 'images/*';
 

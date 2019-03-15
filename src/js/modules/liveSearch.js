@@ -1,7 +1,5 @@
 import { error } from "util";
 
-// import $ from 'jquery';
-
 class LiveSearch {
 
     constructor() {
@@ -70,7 +68,6 @@ class LiveSearch {
                     if( this.searchField.value != '' ){
                         this.pageHeaderTitle.innerHTML = this.searchField.value;
                         this.searchResultContainer.innerHTML = outputResults;
-                        // this.searchField.setAttribute( 'placeholder', this.searchField.value );
                     }else{
                         this.pageHeaderTitle.innerHTML = '';
                         this.searchResultContainer.innerHTML = '';
@@ -82,7 +79,6 @@ class LiveSearch {
                     if( this.searchField.value != '' ){
                         this.pageHeaderTitleTwo.innerHTML = this.searchField.value;
                         this.searchResultContainerTwo.innerHTML = outputResults;
-                        // this.searchField.setAttribute( 'placeholder', this.searchField.value );
                     }else{
                         this.pageHeaderTitleTwo.innerHTML = '';
                         this.searchResultContainerTwo.innerHTML = '';

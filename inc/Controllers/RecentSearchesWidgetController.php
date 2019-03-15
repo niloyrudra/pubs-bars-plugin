@@ -345,7 +345,7 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                     $link = home_url('?s=' . urlencode($search) );
                 }
                 if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                    $link = home_url('?s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
+                    $link = home_url('?search=advanced&s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
                 }
                 if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
                     $link = home_url('?search=advanced&s=&pbp_city=&pbp_country='  . urlencode($search) . '&pbp_csc=&pbp_postal_code=' );
@@ -359,6 +359,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 
 
             } else {
+
+                var_dump($permastruct);
 
                 $search = urlencode($search);
 
