@@ -93,12 +93,11 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 
 
                 if ( $pos !== false ) {
-
                     if ( $pos != 0 ) {
                         $data = array_merge( array_slice( $data, 0, $pos ),
-                            array( $query ), array_slice( $data, $pos + 1 ) );
+                        array( $query ), array_slice( $data, $pos + 1 ) );
                     }
-
+                    
                 } else {
                     // Adding Recent Searches to Recent-Searches-Array
                     array_unshift( $data, $query );
@@ -150,6 +149,7 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
         }
     
+        // Showing  Recent Searches Func
         public function show_recent_searches( $before_list, $after_list, $between_items )
         {
 
@@ -186,23 +186,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                         echo $between_items;
                     }
                     
-                    // Setting Permalinks
-                    if( get_search_query() ){
-                        echo '<a href="', get_search_link( $search ), '"';
-                    }
-                    if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                        echo '<a href="', home_url( "?search=advanced&s=&pbp_city=$search&pbp_country=&pbp_csc=&pbp_postal_code=" ), '"';
-                    }
-                    if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                        echo '<a href="', home_url( "?search=advanced&s=&pbp_city=&pbp_country=$search&pbp_csc=&pbp_postal_code=" ), '"';
-                    }
-                    if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                        echo '<a href="', home_url( "?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=$search&pbp_postal_code=" ), '"';
-                    }
-                    if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                        echo '<a href="', home_url( "?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=$search" ), '"';
-                    }
-
+                    echo '<a href="', get_search_link( $search ), '"';
+                        
                     if ( $options['nofollow'] ) {
                         echo ' rel="nofollow"';
                     }
@@ -359,8 +344,6 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 
 
             } else {
-
-                var_dump($permastruct);
 
                 $search = urlencode($search);
 
