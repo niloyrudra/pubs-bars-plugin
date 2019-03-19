@@ -22,6 +22,10 @@ class SearchController
     public function register_query_vars()
     {
 
+        add_action( 'posts_join', [ $this, 'search_posts_join'] );
+        
+        add_action( 'posts_where', [ $this, 'search_posts_where'] );
+
         add_filter( 'query_vars', [ $this, 'pbp_register_query_vars' ] );
 
         add_action( 'pre_get_posts', [ $this, 'pbp_pre_get_posts' ], 1 );
@@ -32,6 +36,43 @@ class SearchController
 
     }
 
+    public function search_posts_join( $join ) {
+ 
+        global $wp_query, $wpdb;
+      
+        // Searching and not in admin
+        if ( ! is_admin() && $wp_query->is_search && isset( $wp_query->query_vars['s'] ) ) {
+           $join .= "LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id";
+        }
+        return $join;
+      
+    }
+
+    public function search_posts_where( $where ) {
+ 
+        global $wp_query, $wpdb;
+      
+        // Searching and not in admin
+        if ( ! is_admin() && $wp_query->is_search && isset( $wp_query->query_vars['s'] ) ) {
+      
+           // Store search query
+           $s = $wp_query->query_vars['s'];
+      
+           // Write the where clause from scratch
+           $where  = " AND (($wpdb->posts.post_title LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_city_key' AND $wpdb->postmeta.meta_value LIKE '%$s%')  OR ($wpdb->postmeta.meta_key = '_pbp_country_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_postal_code_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_csc_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_address_key' AND $wpdb->postmeta.meta_value LIKE '%$s%'))";
+      
+           // Only posts from 'products' post type
+           $where .= " AND wp_posts.post_type = 'bars'";
+      
+           // Published posts only
+           $where .= " AND wp_posts.post_status = 'publish'";
+      
+           // Because of the join, otherwise multiple same results
+           $where .= " GROUP BY $wpdb->posts.ID";
+        }
+      
+        return $where;
+    }
 
     public function pbp_register_query_vars( $vars )
     {
