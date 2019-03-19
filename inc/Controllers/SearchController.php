@@ -23,7 +23,7 @@ class SearchController
     {
 
         add_action( 'posts_join', [ $this, 'search_posts_join'] );
-        
+
         add_action( 'posts_where', [ $this, 'search_posts_where'] );
 
         add_filter( 'query_vars', [ $this, 'pbp_register_query_vars' ] );
@@ -59,7 +59,7 @@ class SearchController
            $s = $wp_query->query_vars['s'];
       
            // Write the where clause from scratch
-           $where  = " AND (($wpdb->posts.post_title LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_city_key' AND $wpdb->postmeta.meta_value LIKE '%$s%')  OR ($wpdb->postmeta.meta_key = '_pbp_country_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_postal_code_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_csc_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_address_key' AND $wpdb->postmeta.meta_value LIKE '%$s%'))";
+           $where  = " AND (($wpdb->posts.post_title LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_city_key' AND $wpdb->postmeta.meta_value LIKE '%$s%')  OR ($wpdb->postmeta.meta_key = '_pbp_country_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_postal_code_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_csc_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_address_key' AND $wpdb->postmeta.meta_value LIKE '%$s%') OR ($wpdb->postmeta.meta_key = '_pbp_phone_num_key' AND $wpdb->postmeta.meta_value LIKE '%$s%'))";
       
            // Only posts from 'products' post type
            $where .= " AND wp_posts.post_type = 'bars'";
@@ -96,53 +96,6 @@ class SearchController
 
     public function pbp_pre_get_posts( $query )
     {
-
-        // Search Using Advance Search Form
-        if ( isset( $_REQUEST['search'] ) && $_REQUEST['search'] == 'advanced' && ! is_admin() && $query->is_search && $query->is_main_query() ) {
-
-            $query->set( 'post_type', 'bars' );
-    
-            $_city = $_GET['pbp_city'] != '' ? $_GET['pbp_city'] : '';
-            $_country = $_GET['pbp_country'] != '' ? $_GET['pbp_country'] : '';
-            $_csc = $_GET['pbp_csc'] != '' ? $_GET['pbp_csc'] : '';
-            $_postal_code = $_GET['pbp_postal_code'] != '' ? $_GET['pbp_postal_code'] : '';
-            $_address = $_GET['_pbp_address_key'] != '' ? $_GET['_pbp_address_key'] : '';
-    
-            if( $_city || $_country || $_csc || $_postal_code ) {
-
-                $meta_query = array(
-                                    array(
-                                        'key'     => '_pbp_city_key', // assumed your meta_key is '_pbp_city_key'
-                                        'value'   => sanitize_text_field( $_city ),
-                                        'compare' => 'LIKE', // finds models that matches '$_city' from the select field
-                                    ),
-                                    array(
-                                        'key'     => '_pbp_country_key', // assumed your meta_key is '_pbp_country_key'
-                                        'value'   => sanitize_text_field( $_country ),
-                                        'compare' => 'LIKE', // finds models that matches '$_country' from the select field
-                                    ),
-                                    array(
-                                        'key'     => '_pbp_postal_code_key', // assumed your meta_key is '_pbp_postal_code_key'
-                                        'value'   => sanitize_text_field( $_postal_code ),
-                                        'compare' => 'LIKE', // finds models that matches '$_postal_code' from the select field
-                                    ),
-                                    array(
-                                        'key'     => '_pbp_csc_key', // assumed your meta_key is '_pbp_csc_key'
-                                        'value'   => sanitize_text_field( $_csc ),
-                                        'compare' => 'LIKE', // finds models that matches '$_csc' from the select field
-                                    ),
-                                    array(
-                                        'key'     => '_pbp_address_key', // assumed your meta_key is '_pbp_address_key'
-                                        'value'   => sanitize_text_field( $_address ),
-                                        'compare' => 'LIKE', // finds models that matches '$_address' from the select field
-                                    )
-                                );
-
-            }
-            
-            $query->set( 'meta_query', $meta_query );
-    
-        }
 
         // check if the user is requesting an admin page 
         // or current query is not the main query

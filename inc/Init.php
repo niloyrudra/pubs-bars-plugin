@@ -22,7 +22,6 @@ use Inc\Controllers\RestApiRoutes;
 use Inc\Controllers\SearchController;
 use Inc\Controllers\TemplatesController;
 use Inc\Controllers\RecentSearchesWidgetController;
-use Inc\Controllers\AdvanceSearchFormWidgetController;
 
 
 
@@ -36,7 +35,6 @@ final class Init
     public $rct_scr_wdgt;
     public $settings_links;
     public $cpt_controller;
-    public $adv_searchform;
     public $tpl_controller;
     public $admin_callbacks;
     public $search_controller;
@@ -65,9 +63,6 @@ final class Init
 
         // Instanciate Shortcodes Class
         // $this->shortcodes = new Shortcodes();
-        
-        // Instanciate Advance Search Form Widget Class
-        $this->adv_searchform = new AdvanceSearchFormWidgetController();
         
         // Instanciate RestApiRoutes Class
         $this->rest_routes = new RestApiRoutes();
@@ -104,9 +99,6 @@ final class Init
 
         // Registering Reat Routes
         $this->rest_routes->register_rest_api_routes();
-
-        // Registering Advance Search Form Widget
-        $this->adv_searchform->register_searchform();
 
         // Register Recent Search Widget
         $this->rct_scr_wdgt->register_recent_searches_widget();

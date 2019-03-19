@@ -30,8 +30,6 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
             // Widgets initialization
             add_action( 'widgets_init', [ &$this, 'widgets_init' ] );
         
-            // add_filter( 'widget_display_callback', [ $this, 'custom_display_callback' ], 50, 3 );
-        
         }
     
         // Page load
@@ -70,27 +68,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 $query = '';
                 $pos;
 
-                if( get_search_query() ) {
-                    $query = $this->strtolower( trim( get_search_query() ) );
-                    $pos = array_search( $query, $data );
-                }
-                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_city' ] ) ) );
-                    $pos = array_search( $query, $data );
-                }
-                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_country' ] ) ) );
-                    $pos = array_search( $query, $data );
-                }
-                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_csc' ] ) ) );
-                    $pos = array_search( $query, $data );
-                }
-                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                    $query = $this->strtolower( trim( sanitize_text_field( $_GET[ 'pbp_postal_code' ] ) ) );
-                    $pos = array_search( $query, $data );
-                }
-                
+                $query = $this->strtolower( trim( get_search_query() ) );
+                $pos = array_search( $query, $data );
 
                 if ( $pos !== false ) {
                     if ( $pos != 0 ) {
@@ -265,19 +244,6 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
                 'nofollow' => true,
             );
         }
-
-
-        // Scopping widget from displaying other pages
-        public function custom_display_callback( $instance, $widget, $args )
-        {
-            if( is_search() ){
-                return true;
-            }
-            // if( is_page( 10 ) ){
-            //     return false;
-            // }
-            return $instance;
-        }
         
 
     }
@@ -326,23 +292,8 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
             if ( empty( $permastruct ) ) {
 
-                if( get_search_query() ) {
-                    $link = home_url('?s=' . urlencode($search) );
-                }
-                if( isset( $_GET[ 'pbp_city' ] ) && $_GET[ 'pbp_city' ] !== '' ) {
-                    $link = home_url('?search=advanced&s=&pbp_city='  . urlencode($search) . '&pbp_country=&pbp_csc=&pbp_postal_code=' );
-                }
-                if( isset( $_GET[ 'pbp_country' ] ) && $_GET[ 'pbp_country' ] !== '' ) {
-                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country='  . urlencode($search) . '&pbp_csc=&pbp_postal_code=' );
-                }
-                if( isset( $_GET[ 'pbp_csc' ] ) && $_GET[ 'pbp_csc' ] !== '' ) {
-                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc='  . urlencode($search) . '&pbp_postal_code=' );
-                }
-                if( isset( $_GET[ 'pbp_postal_code' ] ) && $_GET[ 'pbp_postal_code' ] !== '' ) {
-                    $link = home_url('?search=advanced&s=&pbp_city=&pbp_country=&pbp_csc=&pbp_postal_code=' . urlencode($search) );
-                }
+                $link = home_url('?s=' . urlencode($search) );
                 
-
             } else {
 
                 $search = urlencode($search);
@@ -356,6 +307,7 @@ if ( !class_exists( 'RecentSearchesWidgetController' ) ) {
 
             return apply_filters( 'search_link', $link, $search );
         }
+        
     }
     
     $recent_searches_widget = new RecentSearchesWidgetController();
