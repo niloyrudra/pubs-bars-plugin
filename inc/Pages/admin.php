@@ -10,4 +10,16 @@
     
     <hr>
 
+<form action="options.php" method="post">
+
+    <?php
+    
+        settings_fields('pbp_settings_group');
+        do_settings_sections('pubs_bars_plugin');
+        submit_button( 'Set Google API Key' );
+
+    ?>
+
+</form>
+
 </div>

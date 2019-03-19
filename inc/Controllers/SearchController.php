@@ -171,7 +171,6 @@ class SearchController
         add_rewrite_rule( '^bars/csc/([^/]*)/?', 'index.php?post_type=bars&csc=$matches[1]','top' );
         add_rewrite_rule( '^bars/postcode/([^/]*)/?', 'index.php?post_type=bars&postcode=$matches[1]','top' );
         add_rewrite_rule( '^bars/phone-number/([^/]*)/?', 'index.php?post_type=bars&phone-num=$matches[1]','top' );
-        add_rewrite_rule( '^bars/country/city/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
         add_rewrite_rule( '^bars/country/([^/]*)/city/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
         add_rewrite_rule( '^bars/([^/]*)/([^/]*)/?', 'index.php?post_type=bars&country=$matches[1]&city=$matches[1]','top' );
         

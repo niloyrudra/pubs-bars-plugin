@@ -56,7 +56,8 @@ class Enqueue
             wp_enqueue_script( 'google-map-init-func', PLUGIN_URL . '/assets/js/google-map.min.js' );
                 
             // Enqueuing Google API Key
-            $API = 'AIzaSyDMofJQCY0Gb1lm2k1DcL3TX_kcnHJLiZI'; // DO NOT FORGET TO REPLACE THIS API KEY INTO VALID/PAID GOOGLE MAP API KEY
+            $api_option = esc_html( get_option( 'google_api_key_option' ) );
+            $API = @$api_option ? $api_option : 'AIzaSyDMofJQCY0Gb1lm2k1DcL3TX_kcnHJLiZI'; // DO NOT FORGET TO REPLACE THIS API KEY INTO VALID/PAID GOOGLE MAP API KEY
 
             wp_enqueue_script( 'pbp-google-map-js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=' . $API );
     
